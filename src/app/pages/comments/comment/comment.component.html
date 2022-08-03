@@ -1,0 +1,10 @@
+<mat-card class="comment-container">
+    <img class="profile-image" [src]="userImgUrl()">
+    <p>{{comment.createdAt}}</p>
+    <!-- TODO: ADD OWNER NAME -->
+    <p>{{comment.txt}}</p>
+    <div *ngIf="activeUser?.id === comment.ownerId">
+        <button mat-raised-button color="primary" >Edit Comment</button>
+        <button mat-raised-button color="primary" >Delete Comment</button>
+    </div>
+</mat-card>
