@@ -1,10 +1,23 @@
-<mat-card class="comment-container">
+<div class="comment-wrapper">
+  <mat-card class="comment" (click)="toggleAddMode()">
     <img class="profile-image" [src]="userImgUrl()">
-    <p>{{comment.createdAt}}</p>
-    <!-- TODO: ADD OWNER NAME -->
-    <p>{{comment.txt}}</p>
-    <div *ngIf="activeUser?.id === comment.ownerId">
-        <button mat-raised-button color="primary" >Edit Comment</button>
-        <button mat-raised-button color="primary" >Delete Comment</button>
+    <div>
+      <p class="user-name">{{commentUser?.displayName}}</p>
+      <p>{{comment.createdAt | dateFormat}}</p>
     </div>
-</mat-card>
+    <p>{{comment.txt}}</p>
+    <div class="comment-action-buttons" *ngIf="activeUser?.id === comment?.ownerId">
+      <button mat-raised-button color="primary" (click)="toggleEditMode($event)">EDIT COMMENT</button>
+      <button mat-raised-button color="primary" (click)="deleteComment()">DELETE COMMENT</button>
+    </div>
+  </mat-card>
+  <ng-container *ngIf="isEditMode || isAddMode">
+    <!-- <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Leave a comment</mat-label>
+      <textarea matInput [(ngModel)]="commentText" [value]="commentText"></textarea>
+      <button mat-raised-button color="primary" (click)="submitComment()">SUBMIT</button>
+    </mat-form-field> -->
+    <app-add-comment (toggleAddMode)="isAddMode = $event" (toggleEditMode)="isEditMode = $event" [isAddCommentForComment]="isAddMode" [isEditComment]="isEditMode" [comment]="comment" [user]="activeUser"></app-add-comment>
+  </ng-container>
+
+</div>

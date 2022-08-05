@@ -1,3 +1,18 @@
 <app-choose-active-user (userChanged)="userChanged($event)"></app-choose-active-user>
-<!-- <app-comment *ngFor="let comment of usersComments" [comment]="comment" [activeUser]="activeUser"></app-comment> -->
-<app-comment [activeUser]="activeUser"></app-comment>
+<div class="comments-container">
+  <div class="scroll-content">
+    <ng-container [ngTemplateOutlet]="commentsTemplate" [ngTemplateOutletContext]="{items:childrenObj[0],level:1}">
+    </ng-container>
+
+    <ng-template #commentsTemplate let-items="items" let-level="level">
+      <div *ngFor="let item of items">
+          <app-comment [ngStyle]="{'margin-left': nestedMargin(level)}" [commentUser]="getCommentUser(item)"  [activeUser]="activeUser" [comment]="item"></app-comment>
+          <ng-container *ngIf="childrenObj[item.id]?.length > 0" [ngTemplateOutlet]="commentsTemplate"
+            [ngTemplateOutletContext]="{items:childrenObj[item.id],level:level+1}"></ng-container>
+      </div>
+    </ng-template>
+  </div>
+  <app-add-comment [isAddNewComment]="true" [user]="activeUser"></app-add-comment>
+</div>
+
+

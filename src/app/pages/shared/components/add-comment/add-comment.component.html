@@ -1,0 +1,6 @@
+<img class="profile-image" [src]="userImgUrl()" alt="user profile image">
+<mat-form-field style="position:relative; width:100%" class="example-full-width" appearance="fill">
+  <mat-label>Leave a comment</mat-label>
+  <textarea matInput #commentTxt [value]="isEditComment? comment?.txt : ''"></textarea>
+  <button style="position:absolute; right: 2%" mat-raised-button color="primary" (click)="submitComment(commentTxt.value)">SUBMIT</button>
+</mat-form-field>

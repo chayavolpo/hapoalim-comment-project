@@ -12,12 +12,14 @@ export class ChooseActiveUserComponent implements OnInit {
   @Output() userChanged: EventEmitter<any> =  new EventEmitter<any>();
   users:any = [];
   selectedUser!: User;
-  
+
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.usersService.users$.subscribe( users => {
       this.users = users;
+      this.selectedUser = users[0];
+      this.userChanged.emit(this.selectedUser);
       console.log('users in component: ', this.users);
     })
   }

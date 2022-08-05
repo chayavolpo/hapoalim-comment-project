@@ -1,5 +1,12 @@
-.comment-container {
-    display: flex
+.comment-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 20px;
+}
+
+.comment {
+  display: inline-flex;
 }
 
 .profile-image {
@@ -11,5 +18,20 @@
 
 mat-card p, mat-card button {
     margin-right: 1rem;
+}
+
+// mat-card {
+//   position:relative !important;
+// }
+
+.user-name {
+  color: purple;
+  font-weight: 700;
+}
+
+.comment-action-buttons {
+  // position: absolute;
+  // right: 0;
+  margin-left: 20%;
 }
 
